@@ -78,17 +78,17 @@ inoremap jk <ESC>
 " Tab completion
 " will insert tab at beginning of line,
 " will use completion if not at beginning
-set wildmode=list:longest,list:full
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <S-Tab> <c-n>
+" set wildmode=list:longest,list:full
+" function! InsertTabWrapper()
+"     let col = col('.') - 1
+"     if !col || getline('.')[col - 1] !~ '\k'
+"         return "\<tab>"
+"     else
+"         return "\<c-p>"
+"     endif
+" endfunction
+" inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
+" inoremap <S-Tab> <c-n>
 
 " vim:ft=vim
 
@@ -220,7 +220,7 @@ set splitbelow
 set splitright
 
 " vim:ft=vim
-j
+
 
 " Set up vim to copy from vim to osx using yank following this
 " https://evertpot.com/osx-tmux-vim-copy-paste-clipboard/
@@ -229,6 +229,15 @@ set clipboard=unnamed
 "----------------
 "----------------
 " Intall Vim Plugins
+"----------------
+"------------
+" Automatically load Plug
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 "----------------
 "------------
 
@@ -321,8 +330,8 @@ Plug 'tpope/vim-commentary'
 Plug 'svermeulen/vim-easyclip'
 
 " NOTE As a result of the above, by default easyclip will shadow an important vim function: The Add Mark key (m)
-" Therefore either you will want to use a different key for the 'cut' operator 
-" (see options section below for this) or remap something else to 'add mark'. For example, 
+" Therefore either you will want to use a different key for the 'cut' operator
+" (see options section below for this) or remap something else to 'add mark'. For example,
 " to use gm for 'add mark' instead of m, include the following in your vimrc
 
 nnoremap gm m
@@ -443,7 +452,7 @@ Plug 'tpope/vim-repeat'
 " vim:ft=vim
 
 " If you've ever tried using the . command after a plugin map, you were likely disappointed to discover
-" it only repeated the last native command inside that map, rather than the map as a whole. 
+" it only repeated the last native command inside that map, rather than the map as a whole.
 " That disappointment ends today. Repeat.vim remaps . in a way that plugins can tap into it.
 
 Plug 'tpope/vim-repeat'
@@ -462,13 +471,13 @@ Plug 'vim-ruby/vim-ruby'
 " Vim Spec Runner - Smart spec (rspec) runner
 "-------------------------------------------------------------------
 
-Plug 'gabebw/vim-spec-runner'
-map <leader>s <Plug>RunFocusedSpec
-map <Leader>t <Plug>RunCurrentSpecFile
-map <Leader>v <Plug>RunMostRecentSpec
+" Plug 'gabebw/vim-spec-runner'
+" map <leader>s <Plug>RunFocusedSpec
+" map <Leader>t <Plug>RunCurrentSpecFile
+" map <Leader>v <Plug>RunMostRecentSpec
 
 " Using tslime.vim:
-let g:spec_runner_dispatcher = "VtrSendCommand! bin/{command}"
+" let g:spec_runner_dispatcher = "VtrSendCommand! bin/{command}"
 
 
 " vim:ft=vim
@@ -520,7 +529,7 @@ Plug 'tpope/vim-vinegar'
 " vim:ft=vim
 
 "-------------------------------------------------------------------
-" Visual-star-search 
+" Visual-star-search
 "https://github.com/nelstrom/vim-visual-star-search"
 "-------------------------------------------------------------------
 
@@ -581,7 +590,7 @@ Plug 'tpope/vim-fugitive'
 " https://github.com/sirver/UltiSnips
 "-------------------------------------------------------------------
 
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 
 "-------------------------------------------------------------------
 " Write JavaScript ES6 easily with vim.
@@ -593,7 +602,36 @@ Plug 'isRuslan/vim-es6'
 
 " vim:ft=vim
 "----------------
-"----------------
+"-------------------------------------------------------------------
+" Adds vim-test and tslime to vim plugins.
+" This is a newer and improved test runner to vim-rspec
+" I hope it runs js tests as well
+" https://github.com/vim-test/vim-test
+" https://flowfx.de/blog/running-rspec-with-a-single-keystroke-in-a-separate-tmux-session/
+"-------------------------------------------------------------------
+"
+Plug 'vim-test/vim-test'
+
+"" Configure vim-test to execute test command using tslime
+let test#strategy = "tslime"
+
+" configure rspec to run with spring first
+let test#ruby#rspec#executable = 'be rspec'
+
+" Configure mocha to runs tests that match the format we have in Kairos
+let test#javascript#mocha#file_pattern = 'Spec\.js'
+let test#javascript#mocha#executable = 'npm test'
+
+" Map the nearest test to run on space s (does not work for mocha tests)
+map <leader>s :TestNearest<CR>
+" Map the current test file to run on space t
+map <Leader>t :TestFile<CR>
+" Map the last test file run to run on space v
+map <Leader>v :TestLast<CR>
+
+" vim:ft=vim
+"------------------------------------------------------------------------
+
 " End Install Vim Plugins
 "----------------
 "----------------
