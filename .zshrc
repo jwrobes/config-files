@@ -32,3 +32,11 @@ PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 . /usr/local/opt/asdf/libexec/asdf.sh
 
 . /usr/local/opt/asdf/libexec/asdf.sh
+
+. /usr/local/opt/asdf/libexec/asdf.sh
+
+. /usr/local/opt/asdf/libexec/asdf.sh
+
+. /usr/local/opt/asdf/libexec/asdf.sh
+
+. /usr/local/opt/asdf/libexec/asdf.sh
