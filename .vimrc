@@ -590,7 +590,9 @@ Plug 'tpope/vim-fugitive'
 " https://github.com/sirver/UltiSnips
 "-------------------------------------------------------------------
 
-" Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
+let g:UltiSnipsExpandTrigger="<c-g>"
+let g:UltiSnipsEditSplit="vertical"
 
 "-------------------------------------------------------------------
 " Write JavaScript ES6 easily with vim.
@@ -631,6 +633,28 @@ map <Leader>v :TestLast<CR>
 
 " vim:ft=vim
 "------------------------------------------------------------------------
+" vim:ft=vim
+"----------------
+"-------------------------------------------------------------------
+" Adds vim coc.nvim
+" Brings autocomplete to Vim
+" Requires Nodejs >12.12
+"-------------------------------------------------------------------
+"
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" vim:ft=vim
+"------------------------------------------------------------------------
+
+"-------------------------------------------------------------------
+" Adds vim markdown preview
+" Require nvim > 8.1 
+" https://vimawesome.com/plugin/markdown-preview-nvim
+" Requires Yarn and node
+"-------------------------------------------------------------------
+"
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+let g:mkdp_refresh_slow=1
 
 " End Install Vim Plugins
 "----------------
