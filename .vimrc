@@ -590,9 +590,9 @@ Plug 'tpope/vim-fugitive'
 " https://github.com/sirver/UltiSnips
 "-------------------------------------------------------------------
 
-Plug 'SirVer/ultisnips'
-let g:UltiSnipsExpandTrigger="<c-g>"
-let g:UltiSnipsEditSplit="vertical"
+" Plug 'SirVer/ultisnips'
+" let g:UltiSnipsExpandTrigger="<c-g>"
+" let g:UltiSnipsEditSplit="vertical"
 
 "-------------------------------------------------------------------
 " Write JavaScript ES6 easily with vim.
