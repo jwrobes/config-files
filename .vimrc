@@ -618,7 +618,10 @@ Plug 'vim-test/vim-test'
 let test#strategy = "tslime"
 
 " configure rspec to run with spring first
-let test#ruby#rspec#executable = 'be rspec'
+let test#ruby#rspec#executable = 'rspec'
+
+" let test#ruby#rspec#executable = 'docker compose run test rspec'
+
 
 " Configure mocha to runs tests that match the format we have in Kairos
 let test#javascript#mocha#file_pattern = 'Spec\.js'
@@ -642,6 +645,7 @@ map <Leader>v :TestLast<CR>
 "-------------------------------------------------------------------
 "
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 " vim:ft=vim
 "------------------------------------------------------------------------
@@ -662,6 +666,10 @@ let g:mkdp_refresh_slow=1
 
 " Initialize plugin system
 call plug#end()
+
+" Command to check spelling
+command! -nargs=0 Spell :setlocal spell spelllang=<en>
+
 
 "----------------
 "----------------
