@@ -11,6 +11,11 @@
 
 ### Standard Dotfiles Setup Process
 
+## Dotfile set up guide can be found 
+[https://www.atlassian.com/git/tutorials/dotfiles](In this blog post)
+Refer to this guide if instructions are NOT clear in the CLAUDE file.
+
+
 #### 1. Clone Your Dotfiles Repository
 ```bash
 # Navigate to home directory
@@ -83,19 +88,34 @@ cd ~/dotfiles
 git pull origin main
 ```
 
-#### Add New Dotfile
+#### Add New Dotfile (Using Bare Repository Method)
 ```bash
-# Move existing file to dotfiles repo
-mv ~/.newconfig ~/dotfiles/.newconfig
+# Check status of tracked files
+config status
 
-# Create symbolic link
-ln -sf ~/dotfiles/.newconfig ~/.newconfig
+# Add the file to be tracked
+config add .newconfig
 
-# Commit to repo
-cd ~/dotfiles
-git add .newconfig
-git commit -m "Add .newconfig"
-git push origin main
+# Commit changes with descriptive message
+config commit -m "Add .newconfig"
+
+# Push to GitHub (ask for permission first)
+config push
+```
+
+#### Update Existing Dotfile
+```bash
+# Check what files have changed
+config status
+
+# Add specific changed file
+config add .tmux.conf
+
+# Commit with descriptive message
+config commit -m "Update tmux configuration with iTerm2 mouse scroll fix"
+
+# Push changes to GitHub (ask for permission first)  
+config push
 ```
 
 ### Troubleshooting
